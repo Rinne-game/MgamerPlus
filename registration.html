@@ -121,15 +121,6 @@ const firebaseConfig = {
         } else {
           console.log("User added to database successfully");
         }
-      });database.ref('users/' + uid).set({
-        alignment: false  // ここにbool値を追加
-        // 他に保存したいユーザー情報があれば追加
-      }, (error) => {
-        if (error) {
-          console.error("Error adding user to database:", error);
-        } else {
-          console.log("User added to database successfully");
-        }
       });
     }
     function redirectToAnotherSite() {
