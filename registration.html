@@ -73,6 +73,7 @@ const firebaseConfig = {
           const user = userCredential.user;
           addUserToDatabase(user.uid, email);
                 alert('ユーザー登録に成功しました。');
+		redirectToAnotherSite();
           console.log("User registered:", user);
         })
         .catch((error) => {
@@ -94,6 +95,7 @@ const firebaseConfig = {
           const user = result.user;
           addUserToDatabase(user.uid, user.email);
                 alert('認証に成功しました。');
+		redirectToAnotherSite();
           console.log("User registered with Google:", user);
         })
         .catch((error) => {
