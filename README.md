@@ -1,0 +1,2 @@
+# MgamerPlus
+Mgamerをもっと楽しんでいただくためのものです。
