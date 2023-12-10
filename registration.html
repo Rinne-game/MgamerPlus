@@ -109,11 +109,12 @@ const firebaseConfig = {
         });
     }
 
+
     // Realtime Database にユーザー情報を追加する関数
     function addUserToDatabase(uid, email) {
       // 'users' ノード下にユーザー情報を保存
       database.ref('users/' + uid).set({
-        email: email,
+        email: email
         // 他に保存したいユーザー情報があれば追加
       }, (error) => {
         if (error) {
