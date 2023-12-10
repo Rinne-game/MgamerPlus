@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>µgamerPlus:ログイン</title>
+  <!-- Firebase JavaScript SDK -->
+  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
+</head>
+<body>
+
+  <h1>µgamerPlus ログイン</h1>
+
+  <!-- Email Login Form -->
+  <h2>Emailでログイン</h2>
+  <form id="emailLoginForm">
+    <label for="loginEmail">Email:</label>
+    <input type="email" id="loginEmail" required>
+    <label for="loginPassword">Password:</label>
+    <input type="password" id="loginPassword" required>
+    <button type="button" onclick="loginWithEmail()">Emailでログイン</button>
+  </form>
+
+  <!-- Google Login Button -->
+  <h2>Googleでログイン</h2>
+  <button type="button" onclick="loginWithGoogle()" id="button_Google"  disabled>Googleでログイン</button>
+  <br><br>
+	<a href="index.html" rel="noopener">ホーム</a>
+  <script>
+    // ページが読み込まれた時に実行される関数
+    window.onload = function () {
+      // 現在のプロトコル（httpまたはhttps）を取得
+      var currentProtocol = window.location.protocol;
+
+      // HTTPSでホストされている場合、ボタンを有効にする
+      if (currentProtocol === "https:") {
+        document.getElementById("button_Google").disabled = false;
+      }
+    };
+  </script>
+
+  <!-- Firebase Configuration -->
+  <script>
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyCJynyJegBf1YqNygmDdH6___pWllhpr8Q",
+  authDomain: "mgamer-5e36f.firebaseapp.com",
+  databaseURL: "https://mgamer-5e36f-default-rtdb.firebaseio.com",
+  projectId: "mgamer-5e36f",
+  storageBucket: "mgamer-5e36f.appspot.com",
+  messagingSenderId: "1025833311559",
+  appId: "1:1025833311559:web:82414cd305a3236addc062",
+  measurementId: "G-5PMJFS877G"
+};
+
+    // Firebase 初期化
+    firebase.initializeApp(firebaseConfig);
+  </script>
+
+  <!-- Firebase Authentication Functions -->
+  <script>
+    // Email Login Function
+    function loginWithEmail() {
+      const email = document.getElementById('loginEmail').value;
+      const password = document.getElementById('loginPassword').value;
+
+      firebase.auth().signInWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          // ログイン成功時の処理
+          const user = userCredential.user;
+                alert('ログインに成功しました。');
+          console.log("User logged in:", user);
+
+          // ログインが成功したら、指定したサイトにリダイレクト
+          //redirectToAnotherSite();
+        })
+        .catch((error) => {
+          // エラー時の処理
+          const errorCode = error.code;
+          const errorMessage = error.message;
+                alert('ログインに失敗しました。');
+          console.error("Login error:", errorCode, errorMessage);
+        });
+    }
+
+    // Google Login Function
+    function loginWithGoogle() {
+      const provider = new firebase.auth.GoogleAuthProvider();
+
+      firebase.auth().signInWithPopup(provider)
+        .then((result) => {
+          // Google ログイン成功時の処理
+          const user = result.user;
+                alert('ログインに成功しました。');
+          console.log("User logged in with Google:", user);
+
+          // ログインが成功したら、指定したサイトにリダイレクト
+          //redirectToAnotherSite();
+        })
+        .catch((error) => {
+          // Google ログインエラー時の処理
+          const errorCode = error.code;
+          const errorMessage = error.message;
+                alert('ログインに失敗しました。');
+          console.error("Google login error:", errorCode, errorMessage);
+        });
+    }
+
+    // ログイン成功後のリダイレクト関数
+    function redirectToAnotherSite() {
+      // ログインが成功したら、指定したサイトにリダイレクト
+      window.location.href = "https://example.com"; // ここにリダイレクトしたいサイトのURLを設定
+    }
+  </script>
+
+</body>
+</html>
