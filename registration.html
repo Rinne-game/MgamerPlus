@@ -114,7 +114,7 @@ const firebaseConfig = {
       // 'users' ノード下にユーザー情報を保存
       database.ref('users/' + uid).set({
         email: email,
-	alignment:false
+        alignment: false  // ここにbool値を追加
         // 他に保存したいユーザー情報があれば追加
       }, (error) => {
         if (error) {
