@@ -25,18 +25,9 @@
 
   <!-- Google Registration Button -->
   <h2>Googleアカウントで登録</h2>
-  <button type="button" onclick="registerWithGoogle()"　id="button_Google"  disabled>Googleアカウントで登録</button>
+  <button type="button" onclick="registerWithGoogle()"　id="button_Google">Googleアカウントで登録</button>
   <br><br>
 	<a href="index.html" rel="noopener">ホーム</a>
-  <script>
-  window.onload = function(){
-  var currentProtocol = window.location.protocol;
-  	if(currentProtocol === "https:")
-  	{
-  document.getElementById('button_Google').disabled = false;
-  }
-  }
-  </script>
 
   <!-- Firebase Configuration -->
   <script>// For Firebase JS SDK v7.20.0 and later, measurementId is optional
