@@ -35,6 +35,7 @@
       // 現在のプロトコル（httpまたはhttps）を取得
       var currentProtocol_2 = window.location.protocol;
 
+	console.Log("isHTPPS"+currentProtocol_2 === "https:");
       // HTTPSでホストされている場合、ボタンを有効にする
       if (currentProtocol_2 === "https:") {
         document.getElementById("button_Google_1").disabled = false;
