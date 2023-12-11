@@ -33,9 +33,9 @@
     // ページが読み込まれた時に実行される関数
     window.onload = function () {
       // 現在のプロトコル（httpまたはhttps）を取得
-      var currentProtocol_2 = window.location.protocol;
+      var currentProtocol = window.location.protocol;
       // HTTPSでホストされている場合、ボタンを有効にする
-      if (currentProtocol_2 === "https:") {
+      if (currentProtocol === "https:") {
         document.getElementById("button_Google_1").disabled = false;
       }
     };
