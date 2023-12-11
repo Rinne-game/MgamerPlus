@@ -73,8 +73,8 @@ const firebaseConfig = {
         .then((userCredential) => {
           // 登録成功時の処理
           const user = userCredential.user;
-          addUserToDatabase(user.uid, email);
                 alert('ユーザー登録に成功しました。');
+          addUserToDatabase(user.uid, email);
 		redirectToAnotherSite();
           console.log("User registered:", user);
         })
@@ -95,8 +95,8 @@ const firebaseConfig = {
         .then((result) => {
           // Google 認証成功時の処理
           const user = result.user;
-          addUserToDatabase(user.uid, user.email);
                 alert('認証に成功しました。');
+          addUserToDatabase(user.uid, user.email);
 		redirectToAnotherSite();
           console.log("User registered with Google:", user);
         })
@@ -112,21 +112,21 @@ const firebaseConfig = {
       // ログインが成功したら、指定したサイトにリダイレクト
       window.location.href = "index.html"; // ここにリダイレクトしたいサイトのURLを設定
     }
-
-    // Realtime Database にユーザー情報を追加する関数
-    function addUserToDatabase(uid, email) {
-      // 'users' ノード下にユーザー情報を保存
-      database.ref('users/' + uid).set({
-        email: email
-        // 他に保存したいユーザー情報があれば追加
-      }, (error) => {
-        if (error) {
-          console.error("Error adding user to database:", error);
-        } else {
-          console.log("User added to database successfully");
-        }
-      });
-    }
+// Realtime Database にユーザー情報を追加する関数
+async function addUserToDatabase(uid, email, displayName) {
+  try {
+    // 'users' ノード下にユーザー情報を保存
+    await database.ref('users/' + uid).set({
+      email: email,
+      displayName: displayName
+      // 他に保存したいユーザー情報があればここに追加
+    });
+    return true; // 成功時に true を返す
+  } catch (error) {
+    console.error("Error adding user to database:", error);
+    return false; // 失敗時に false を返す
+  }
+}
   </script>
 
 </body>
