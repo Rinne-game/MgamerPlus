@@ -72,9 +72,9 @@ const firebaseConfig = {
           const user = userCredential.user;
                 alert('ログインに成功しました。');
           console.log("User logged in:", user);
+      // ユーザーのデータが存在するか確認
+        checkUserData(user.uid);
 
-          // ログインが成功したら、指定したサイトにリダイレクト
-          //redirectToAnotherSite();
         })
         .catch((error) => {
           // エラー時の処理
@@ -95,9 +95,7 @@ const firebaseConfig = {
           const user = result.user;
                 alert('ログインに成功しました。');
           console.log("User logged in with Google:", user);
-
-          // ログインが成功したら、指定したサイトにリダイレクト
-          //redirectToAnotherSite();
+           checkUserData(user.uid);
         })
         .catch((error) => {
           // Google ログインエラー時の処理
@@ -107,6 +105,25 @@ const firebaseConfig = {
           console.error("Google login error:", errorCode, errorMessage);
         });
     }
+  // ユーザーのデータが存在するか確認する関数
+  function checkUserData(uid) {
+    const userRef = database.ref('users/' + uid);
+
+    // 'once'メソッドを使用して1回だけデータを取得
+    userRef.once('value', (snapshot) => {
+      const userData = snapshot.val();
+
+      if (userData) {
+        // ユーザーデータが存在する場合の処理
+        console.log("User data exists:", userData);
+          // ログインが成功したら、指定したサイトにリダイレクト
+          //redirectToAnotherSite();
+      } else {
+        // ユーザーデータが存在しない場合の処理
+        console.log("ゲームデータがありません。µgamerと連携してください。");
+      }
+    });
+  }
 
     // ログイン成功後のリダイレクト関数
     function redirectToAnotherSite() {
