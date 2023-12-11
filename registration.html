@@ -73,10 +73,19 @@ const firebaseConfig = {
         .then((userCredential) => {
           // 登録成功時の処理
           const user = userCredential.user;
-                alert('ユーザー登録に成功しました。');
-          addUserToDatabase(user.uid, email);
 		redirectToAnotherSite();
           console.log("User registered:", user);
+        // Realtime Database にユーザー情報を追加
+        const success = addUserToDatabase(user.uid, email); // ここにdisplayNameを追加
+        if (success) {
+          // 成功時の処理
+          console.log("User added to database successfully");
+                alert('ユーザー登録に成功しました。');
+        } else {
+          // 失敗時の処理
+          console.error("Error adding user to database");
+                alert('ユーザー登録に失敗しました。');
+        }
         })
         .catch((error) => {
           // エラー時の処理
@@ -95,10 +104,19 @@ const firebaseConfig = {
         .then((result) => {
           // Google 認証成功時の処理
           const user = result.user;
-                alert('認証に成功しました。');
-          addUserToDatabase(user.uid, user.email);
 		redirectToAnotherSite();
           console.log("User registered with Google:", user);
+        // Realtime Database にユーザー情報を追加
+        const success = addUserToDatabase(user.uid, user.email); // ここにdisplayNameを追加
+        if (success) {
+          // 成功時の処理
+          console.log("User added to database successfully");
+                alert('認証に成功しました。');
+        } else {
+          // 失敗時の処理
+          console.error("Error adding user to database");
+                alert('認証に失敗しました。');
+        }
         })
         .catch((error) => {
           // Google 認証エラー時の処理
