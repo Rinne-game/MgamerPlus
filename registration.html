@@ -112,20 +112,20 @@ const firebaseConfig = {
       // ログインが成功したら、指定したサイトにリダイレクト
       window.location.href = "index.html"; // ここにリダイレクトしたいサイトのURLを設定
     }
-    // Realtime Database にユーザー情報を追加する関数
-    function addUserToDatabase(uid, email) {
+  async function addUserToDatabase(uid, email) {
+    try {
       // 'users' ノード下にユーザー情報を保存
-      database.ref('users/' + uid).set({
-        iscooperation: false
-        // 他に保存したいユーザー情報があれば追加
-      }, (error) => {
-        if (error) {
-          console.error("Error adding user to database:", error);
-        } else {
-          console.log("User added to database successfully");
-        }
+      await database.ref('users/' + uid).set({
+        email: email,
+        iscooperation: false  // ここにbool値を追加
+        // 他に保存したいユーザー情報があればここに追加
       });
+      return true; // 成功時に true を返す
+    } catch (error) {
+      console.error("Error adding user to database:", error);
+      return false; // 失敗時に false を返す
     }
+  }
   </script>
 
 </body>
