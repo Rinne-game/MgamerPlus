@@ -70,7 +70,6 @@ const firebaseConfig = {
         .then((userCredential) => {
           // ログイン成功時の処理
           const user = userCredential.user;
-                alert('ログインに成功しました。');
           console.log("User logged in:", user);
       // ユーザーのデータが存在するか確認
         checkUserData(user.uid);
@@ -93,7 +92,6 @@ const firebaseConfig = {
         .then((result) => {
           // Google ログイン成功時の処理
           const user = result.user;
-                alert('ログインに成功しました。');
           console.log("User logged in with Google:", user);
            checkUserData(user.uid);
         })
@@ -116,6 +114,7 @@ const firebaseConfig = {
       if (userData) {
         // ユーザーデータが存在する場合の処理
         console.log("User data exists:", userData);
+                alert('ログインに成功しました。');
           // ログインが成功したら、指定したサイトにリダイレクト
           //redirectToAnotherSite();
       } else {
