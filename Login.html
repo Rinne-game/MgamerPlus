@@ -24,22 +24,11 @@
 
   <!-- Google Login Button -->
   <h2>Googleでログイン</h2>
-  <button type="button" onclick="loginWithGoogle()" id="button_Google_1" disabled>Googleでログイン</button>
+  <button type="button" onclick="loginWithGoogle()" disabled>Googleでログイン</button>
   <br>
 	<a href="registration.html" rel="noopener">登録されていない方</a>
 	<br>
 	<a href="index.html" rel="noopener">ホーム</a>
-  <script>
-    // ページが読み込まれた時に実行される関数
-    window.onload = function () {
-      // 現在のプロトコル（httpまたはhttps）を取得
-      var currentProtocol = window.location.protocol;
-      // HTTPSでホストされている場合、ボタンを有効にする
-      if (currentProtocol === "https:") {
-        document.getElementById("button_Google_1").disabled = false;
-      }
-    };
-  </script>
 
   <!-- Firebase Configuration -->
   <script>
