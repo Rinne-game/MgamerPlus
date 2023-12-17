@@ -22,6 +22,14 @@
     <input type="password" id="password" required>
     <button type="button" onclick="registerWithEmail()">メールアドレスで登録</button>
   </form>
+	<p>1,パスワードは8桁以上である必要があります。</p>
+  <div id="length">❌ 8文字以上</div>
+	<p>2,次に、パスワードには、大文字、小文字、数字、記号の4種類うち3種類以上を使ってください。</p>
+  <div id="uppercase">❌ 大文字</div>
+  <div id="lowercase">❌ 小文字</div>
+  <div id="digit">❌ 数字</div>
+  <div id="symbol">❌ 記号</div>
+  <button onclick="checkPassword()">パスワードをチェック</button>
 
   <!-- Google Registration Button -->
   <h2>Googleアカウントで登録</h2>
@@ -32,6 +40,38 @@
 	<a href="index.html" rel="noopener">ホーム</a>
 
   <!-- Firebase Configuration -->
+  <script>
+    function checkPassword() {
+      // パスワードを取得
+      var password = document.getElementById("password").value;
+
+      // 条件をチェック
+      var lengthCheck = password.length >= 8;
+      var uppercaseCheck = /[A-Z]/.test(password);
+      var lowercaseCheck = /[a-z]/.test(password);
+      var digitCheck = /\d/.test(password);
+      var symbolCheck = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]/.test(password);
+
+      // 条件を満たしているか確認
+      if (lengthCheck && (uppercaseCheck + lowercaseCheck + digitCheck + symbolCheck >= 3)) {
+        document.getElementById("length").textContent = "✅ 8文字以上";
+        document.getElementById("uppercase").textContent = "✅ 大文字";
+        document.getElementById("lowercase").textContent = "✅ 小文字";
+        document.getElementById("digit").textContent = "✅ 数字";
+        document.getElementById("symbol").textContent = "✅ 記号";
+        document.getElementById("password").classList.remove("password-invalid");
+        document.getElementById("password").classList.add("password-valid");
+      } else {
+        document.getElementById("length").textContent = "❌ 8文字以上";
+        document.getElementById("uppercase").textContent = uppercaseCheck ? "✅ 大文字" : "❌ 大文字";
+        document.getElementById("lowercase").textContent = lowercaseCheck ? "✅ 小文字" : "❌ 小文字";
+        document.getElementById("digit").textContent = digitCheck ? "✅ 数字" : "❌ 数字";
+        document.getElementById("symbol").textContent = symbolCheck ? "✅ 記号" : "❌ 記号";
+        document.getElementById("password").classList.remove("password-valid");
+        document.getElementById("password").classList.add("password-invalid");
+      }
+    }
+  </script>
   <script>// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyCJynyJegBf1YqNygmDdH6___pWllhpr8Q",
@@ -64,6 +104,19 @@ const firebaseConfig = {
 		redirectToAnotherSite();
           console.log("User registered:", user);
         // Realtime Database にユーザー情報を追加
+      // パスワードを取得
+      var password = document.getElementById("password").value;
+
+      // 条件をチェック
+      var lengthCheck = password.length >= 8;
+      var uppercaseCheck = /[A-Z]/.test(password);
+      var lowercaseCheck = /[a-z]/.test(password);
+      var digitCheck = /\d/.test(password);
+      var symbolCheck = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]/.test(password);
+
+      // 条件を満たしているか確認
+      if (lengthCheck && (uppercaseCheck + lowercaseCheck + digitCheck + symbolCheck >= 3)) {
+
         const success = addUserToDatabase(user.uid, email); // ここにdisplayNameを追加
         if (success) {
           // 成功時の処理
@@ -74,6 +127,10 @@ const firebaseConfig = {
           console.error("Error adding user to database");
                 alert('ユーザー登録に失敗しました。');
         }
+	      
+      } else {
+        alert("パスワードが条件を満たしていません。条件を確認してください。");
+      }
         })
         .catch((error) => {
           // エラー時の処理
@@ -136,4 +193,7 @@ async function addUserToDatabase(uid, email) {
   </script>
 
 </body>
+<footer>
+µgamerPlis Ver.2.0
+</footer>
 </html>
