@@ -19,7 +19,7 @@
     <label for="email">Email:</label>
     <input type="email" id="email" required>
     <label for="password">Password:</label>
-    <input type="password" id="password" required>
+    <input type="password" id="password"  oninput="checkPassword()" required>
     <button type="button" onclick="registerWithEmail()">メールアドレスで登録</button>
   </form><br>
 <h3>パスワードチェッカー</h3>
@@ -41,7 +41,7 @@
 
   <!-- Firebase Configuration -->
   <script>
-    window.onload = function() {
+    function checkPassword() {
       // パスワードを取得
       var password = document.getElementById("password").value;
 
