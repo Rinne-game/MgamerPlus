@@ -21,7 +21,8 @@
     <label for="password">Password:</label>
     <input type="password" id="password" required>
     <button type="button" onclick="registerWithEmail()">メールアドレスで登録</button>
-  </form>
+  </form><br>
+<h3>パスワードチェッカー</h3>
 	<p>1,パスワードは8桁以上である必要があります。</p>
   <div id="length">❌ 8文字以上</div>
 	<p>2,次に、パスワードには、大文字、小文字、数字、記号の4種類うち3種類以上を使ってください。</p>
@@ -29,7 +30,6 @@
   <div id="lowercase">❌ 小文字</div>
   <div id="digit">❌ 数字</div>
   <div id="symbol">❌ 記号</div>
-  <button onclick="checkPassword()">パスワードをチェック</button>
 
   <!-- Google Registration Button -->
   <h2>Googleアカウントで登録</h2>
@@ -41,7 +41,7 @@
 
   <!-- Firebase Configuration -->
   <script>
-    function checkPassword() {
+    window.onload = function() {
       // パスワードを取得
       var password = document.getElementById("password").value;
 
