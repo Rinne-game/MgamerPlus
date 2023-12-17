@@ -96,14 +96,6 @@ const firebaseConfig = {
     function registerWithEmail() {
       const email = document.getElementById('email').value;
       const password = document.getElementById('password').value;
-
-      firebase.auth().createUserWithEmailAndPassword(email, password)
-        .then((userCredential) => {
-          // 登録成功時の処理
-          const user = userCredential.user;
-		redirectToAnotherSite();
-          console.log("User registered:", user);
-        // Realtime Database にユーザー情報を追加
       // パスワードを取得
       var password = document.getElementById("password").value;
 
@@ -117,6 +109,14 @@ const firebaseConfig = {
       // 条件を満たしているか確認
       if (lengthCheck && (uppercaseCheck + lowercaseCheck + digitCheck + symbolCheck >= 3)) {
 
+      firebase.auth().createUserWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          // 登録成功時の処理
+          const user = userCredential.user;
+		redirectToAnotherSite();
+          console.log("User registered:", user);
+        // Realtime Database にユーザー情報を追加
+
         const success = addUserToDatabase(user.uid, email); // ここにdisplayNameを追加
         if (success) {
           // 成功時の処理
@@ -127,10 +127,6 @@ const firebaseConfig = {
           console.error("Error adding user to database");
                 alert('ユーザー登録に失敗しました。');
         }
-	      
-      } else {
-        alert("パスワードが条件を満たしていません。条件を確認してください。");
-      }
         })
         .catch((error) => {
           // エラー時の処理
@@ -139,6 +135,10 @@ const firebaseConfig = {
                 alert('ユーザー登録に失敗しました。');
           console.error("Registration error:", errorCode, errorMessage);
         });
+	      
+      } else {
+        alert("パスワードが条件を満たしていません。条件を確認してください。");
+      }
     }
 
     // Google Registration Function
